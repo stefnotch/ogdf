@@ -5,26 +5,30 @@
 #include <ogdf/planarity/PlanarSubgraphFast.h>
 #include <ogdf/planarity/SubgraphPlanarizer.h>
 #include <ogdf/planarity/VariableEmbeddingInserter.h>
+
 #include <iostream>
 #include <string>
 
 using namespace ogdf;
 
-int main()
-{
+int main() {
 	Graph G;
-	randomSimpleGraph(G, 100, 150);
+	if (!GraphIO::read(G, "input.gml")) {
+		std::cerr << "Could not load input.gml" << std::endl;
+		return 1;
+	}
 
-	SubgraphPlanarizer SP;
-	SP.setSubgraph(new PlanarSubgraphFast<int>);
-	SP.setInserter(new VariableEmbeddingInserter);
+	auto PL = new PlanarSubgraphFast<int>;
+	PL->runs(10);
 
-	int crossNum;
-	PlanRep PR(G);
-	SP.call(PR, 0, crossNum);
+	List<edge> delEdges;
+	PL->call(G, delEdges);
 
-	std::cout << crossNum << " crossings" << std::endl;
-	GraphIO::write(PR, "output-plan.gml", GraphIO::writeGML);
+	for (edge& eDel : delEdges) {
+		std::cout << eDel << std::endl;
+	}
 
+	// GraphIO::write(G, "done", GraphIO::writeGML);
+	// std::cout << "wrote to output.gml" << std::endl;
 	return 0;
 }
