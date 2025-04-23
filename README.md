@@ -6,6 +6,7 @@ Fork of the whole OGDF repo, since that was the easiest option.
 Steps to build on windows
 ```
 git clone git@github.com:stefnotch/ogdf.git
+cd ogdf
 ```
 
 Make sure that CMake is installed (see: Visual Studio Installer)
