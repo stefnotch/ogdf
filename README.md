@@ -17,6 +17,8 @@ cmake .
 MSBuild.exe .\ex-subgraph-planarizer.vcxproj
 ```
 
+(On Linux, it's `make ex-subgraph-planarizer`)
+
 That compiles the `doc/examples/basic/subgraph-planarizer.cpp` example 
 
 It is then found at `doc/examples/basic/Debug/ex-subgraph-planarizer.exe`
